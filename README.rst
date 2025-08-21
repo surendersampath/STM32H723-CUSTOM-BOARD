@@ -31,3 +31,8 @@ Sample Output
     Hello World! x86
 
 Exit QEMU by pressing :kbd:`CTRL+A` :kbd:`x`.
+
+
+.. image:: image.png
+   :alt: Alternate text for the image
+   :align: center
