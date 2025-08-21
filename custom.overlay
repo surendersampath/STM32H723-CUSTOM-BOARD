@@ -1,0 +1,46 @@
+&clk_hse {
+	/delete-property/ hse-bypass;
+	clock-frequency = <DT_FREQ_M(25)>;
+	status = "okay";
+};
+
+&pll {
+    div-m = <16>;
+    mul-n = <125>;
+    div-p = <1>;
+    div-q = <1>;
+    clocks = <&clk_hse>;
+    status = "okay";
+};
+
+&rcc {
+	clocks = <&pll>;
+	clock-frequency = <DT_FREQ_M(195)>; 
+	d1cpre = <1>;
+	hpre   = <2>;
+	d1ppre = <2>;
+	d2ppre1 = <2>;
+	d2ppre2 = <2>;
+	d3ppre  = <2>;
+};
+
+/* 2) Blink both candidate LEDs: PD8 (GREEN), PD15 (RED) */
+&{/} {
+	aliases { led0 = &led_green; led1 = &led_red; };
+
+	leds {
+		compatible = "gpio-leds";
+
+		led_green: led_green {
+			gpios = <&gpiod 8 GPIO_ACTIVE_LOW>;   /* PD8 -> LED2 via R59 */
+			label = "LED2_GREEN_PD8";
+		};
+
+		led_red: led_red {
+			gpios = <&gpiod 15 GPIO_ACTIVE_LOW>;  /* PD15 -> LED1 via R61 */
+			label = "LED1_RED_PD15";
+		};
+	};
+};
+
+
